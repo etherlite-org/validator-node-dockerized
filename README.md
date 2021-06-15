@@ -15,7 +15,7 @@
    curl -L "https://github.com/etherlite-org/openethereum/releases/download/v3.2.2-rc.1/openethereum.zip" -o openethereum.zip
    unzip openethereum.zip
    ```
-4. Put password file for mining account.
+4. Create password file for mining account.
    ```bash
    nano password
    ```
