@@ -9,15 +9,24 @@
     cd validator-node-dockerized
    ```
 
-3. To be a validator, you need to have a mining address and a private key for it. Name your JSON keystore file as `keystore.json` and put it to the `validator-node-dockerized` directory. Put keystore's password to `password` file.
-
-4. Import your account
+3. To be a validator, you need to download the binary from official etherlite 
+   ```bash
+   apt install -y unzip
+   curl -L "https://github.com/etherlite-org/openethereum/releases/download/v3.2.2-rc.1/openethereum.zip" -o openethereum.zip
+   unzip openethereum.zip
+   ```
+4. Put password file for mining account.
+   ```bash
+   nano password
+   ```
+   
+5. Create your mining account
 
    ```bash
-   openethereum account import keystore.json --keys-path=data/keys --password=password --chain=etherlite
+   openethereum account new --keys-path=data/keys --password=password --chain=etherlite
    ```
 
-5. Copy `.env.example` to `.env` and configure the `.env` file. There are a few settings you need to define:
+6. Copy `.env.example` to `.env` and configure the `.env` file. There are a few settings you need to define:
 
    ```
    PASSWORD_PATH=/root/password
@@ -28,7 +37,7 @@
    - `EXT_IP` - External IP of the current server.
    - `ACCOUNT` - Your mining address (with leading `0x`).
 
-6. Start your node.
+7. Start your node.
 
    ```bash
    docker-compose up -d
