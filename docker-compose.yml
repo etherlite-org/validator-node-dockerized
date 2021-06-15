@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  openethereum:
+    init: true
+    container_name: etherlite-valnode
+    image: etherliteorg/openethereum
+    user: root
+    command:
+      --chain=etherlite
+      --nat="extip:$EXT_IP"
+      --base-path=/root/data
+      --max-peers=100
+      --unlock="$ACCOUNT"
+      --password="$PASSWORD_PATH"
+      --engine-signer="$ACCOUNT"
+      --jsonrpc-port=8545
+      --jsonrpc-cors=all 
+      --jsonrpc-interface=all 
+      --jsonrpc-hosts=all 
+      --jsonrpc-apis=web3,eth,net,parity,debug 
+      --ws-interface=all 
+      --ws-apis=web3,eth,net,parity,pubsub,debug 
+      --ws-origins=all 
+      --ws-hosts=all 
+      --ws-max-connections=10 
+    healthcheck:
+      test: ["CMD", "sh", "-c", "(curl -sf --connect-timeout 1 --max-time 2 --retry 2 --retry-delay 3 --retry-max-time 15 http://localhost:6060/metrics >/dev/null && curl -sf --connect-timeout 1 --max-time 2 --retry 2 --retry-delay 3 --retry-max-time 15 -X POST -H 'Content-Type: application/json' --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_chainId\",\"id\":1}' http://localhost:8545/ >/dev/null) || sh -c 'pkill -15 openethereum && (sleep 10; pkill -9 openethereum) ; return 1'"]
+      interval: 60s
+      timeout: 30s
+      start_period: 60s
+    volumes:
+      - ./data:/root/data
+      - ./password:/root/password
+      - ./key:/root/data/keys/etl/key
+    expose:
+      - "8545"
+    ports:
+      - "8545:8545"
+      - "8546:8546/udp"
+      - "30303:30303"
+      - "30303:30303/udp"
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
