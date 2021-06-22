@@ -12,7 +12,7 @@
 3. To be a validator, you need to download the binary from official etherlite 
    ```bash
    apt install -y unzip
-   curl -L "https://github.com/etherlite-org/openethereum/releases/download/v3.2.2-rc.1/openethereum.zip" -o openethereum.zip
+   curl -L "https://github.com/etherlite-org/openethereum/releases/download/v3.2.2-rc.1/openethereum-ubuntu.zip" -o openethereum.zip
    unzip openethereum.zip
    ```
 4. Create password file for mining account.
