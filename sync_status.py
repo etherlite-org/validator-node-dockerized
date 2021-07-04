@@ -15,11 +15,11 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
-data = response.json()['result']
-
 starttime = time.time()
 while True:
+    response = requests.request("POST", url, headers=headers, data=payload)
+    data = response.json()['result']
+
     highestBlock = int(data['highestBlock'], 16)
     currentBlock = int(data['currentBlock'], 16)
 
