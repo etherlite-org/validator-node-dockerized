@@ -32,7 +32,7 @@
 7. Create your mining account
 
    ```bash
-   openethereum account new --keys-path=data/keys --password=password --chain=etherlite
+   ./openethereum account new --keys-path=data/keys --password=password --chain=etherlite
    ```
 
 8. Copy `.env.example` to `.env` and configure the `.env` file. There are a few settings you need to define:
