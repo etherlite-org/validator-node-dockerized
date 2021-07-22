@@ -9,24 +9,33 @@
     cd validator-node-dockerized
    ```
 
-3. To be a validator, you need to download the binary from official etherlite 
+3. Download the OpenEthereum From EtherLite Releases.
+
+   ```bash
+   curl -L "https://github.com/etherlite-org/openethereum/releases/download/v3.2.2-rc.1/openethereum-ubuntu20.04.zip" -o openethereum.zip
+   ```
+
+4. Install unzip to unzip the downloaded OpenEthereum zip.
+
    ```bash
    apt install -y unzip
-   curl -L "https://github.com/etherlite-org/openethereum/releases/download/v3.2.2-rc.1/openethereum-ubuntu20.04.zip" -o openethereum.zip
+   ```
+
+5. Unzip the OpenEthereum zip
+   ```bash
    unzip openethereum.zip
    ```
-4. Create password file for mining account.
+6. Create password file for mining account.
    ```bash
-   nano password
+   echo "YOUR-VAL-UNIQUE-PASS" > password
    ```
-   
-5. Create your mining account
+7. Create your mining account
 
    ```bash
    openethereum account new --keys-path=data/keys --password=password --chain=etherlite
    ```
 
-6. Copy `.env.example` to `.env` and configure the `.env` file. There are a few settings you need to define:
+8. Copy `.env.example` to `.env` and configure the `.env` file. There are a few settings you need to define:
 
    ```
    PASSWORD_PATH=/root/password
@@ -37,7 +46,7 @@
    - `EXT_IP` - External IP of the current server.
    - `ACCOUNT` - Your mining address (with leading `0x`).
 
-7. Start your node.
+9. Start your node.
 
    ```bash
    docker-compose up -d
@@ -46,4 +55,3 @@
 After docker containers are created, the node will sync with the chain (may take a while).
 
 To restart you need to use `docker-compose stop` and `docker-compose start` being in the `validator-node-dockerized` directory.
-
