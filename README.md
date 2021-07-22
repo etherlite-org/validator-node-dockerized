@@ -35,7 +35,13 @@
    ./openethereum account new --keys-path=data/keys --password=password --chain=etherlite
    ```
 
-8. Copy `.env.example` to `.env` and configure the `.env` file. There are a few settings you need to define:
+8. Copy `.env.example` to `.env`
+
+   ```bash
+   cp .env.example .env
+   ```
+
+9. Configure the `.env` file. There are a few settings you need to define:
 
    ```
    PASSWORD_PATH=/root/password
@@ -46,11 +52,11 @@
    - `EXT_IP` - External IP of the current server.
    - `ACCOUNT` - Your mining address (with leading `0x`).
 
-9. Start your node.
+10. Start your node.
 
-   ```bash
-   docker-compose up -d
-   ```
+    ```bash
+    docker-compose up -d
+    ```
 
 After docker containers are created, the node will sync with the chain (may take a while).
 
