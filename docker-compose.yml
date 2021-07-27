@@ -18,6 +18,7 @@ services:
       --jsonrpc-interface=all 
       --jsonrpc-hosts=all 
       --jsonrpc-apis=web3,eth,net,parity,debug 
+      --ws-port=8546
       --ws-interface=all 
       --ws-apis=web3,eth,net,parity,pubsub,debug 
       --ws-origins=all 
@@ -34,9 +35,10 @@ services:
       - ./key:/root/data/keys/etl/key
     expose:
       - "8545"
+      - "8546"
     ports:
       - "8545:8545"
-      - "8546:8546/udp"
+      - "8546:8546"
       - "30303:30303"
       - "30303:30303/udp"
     restart: always
