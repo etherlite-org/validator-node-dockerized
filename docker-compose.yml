@@ -23,7 +23,10 @@ services:
       --ws-apis=web3,eth,net,parity,pubsub,debug 
       --ws-origins=all 
       --ws-hosts=all 
-      --ws-max-connections=10 
+      --ws-max-connections=10
+      --min-gas-price=10000000000
+      --gas-floor-target="40000000"
+      --tx-gas-limit="10000000"
     healthcheck:
       test: ["CMD", "sh", "-c", "(curl -sf --connect-timeout 1 --max-time 2 --retry 2 --retry-delay 3 --retry-max-time 15 http://localhost:6060/metrics >/dev/null && curl -sf --connect-timeout 1 --max-time 2 --retry 2 --retry-delay 3 --retry-max-time 15 -X POST -H 'Content-Type: application/json' --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_chainId\",\"id\":1}' http://localhost:8545/ >/dev/null) || sh -c 'pkill -15 openethereum && (sleep 10; pkill -9 openethereum) ; return 1'"]
       interval: 60s
