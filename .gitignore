@@ -2,3 +2,4 @@ keystore.json
 password
 data
 .env
+fetch_key.py
